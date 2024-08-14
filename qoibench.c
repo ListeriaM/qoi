@@ -16,14 +16,17 @@ Compile with:
 #include <dirent.h>
 #include <png.h>
 
+#define STBIDEF static
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_ONLY_PNG
 #define STBI_NO_LINEAR
 #include "stb_image.h"
 
+#define STB_IMAGE_WRITE_STATIC
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
+#define QOIDEF static
 #define QOI_IMPLEMENTATION
 #include "qoi.h"
 

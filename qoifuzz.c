@@ -12,6 +12,7 @@ Compile and run with:
 */
 
 
+#define QOIDEF static
 #define QOI_IMPLEMENTATION
 #include "qoi.h"
 #include <stddef.h>
