@@ -214,6 +214,10 @@ Header - Public functions */
 #ifndef QOI_H
 #define QOI_H
 
+#ifndef QOIDEF
+# define QOIDEF
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -249,6 +253,7 @@ number of channels (3 = RGB, 4 = RGBA) and the colorspace.
 The function returns 0 on failure (invalid parameters, or fopen or malloc
 failed) or the number of bytes written on success. */
 
+QOIDEF
 int qoi_write(const char *filename, const void *data, const qoi_desc *desc);
 
 
@@ -262,6 +267,7 @@ will be filled with the description from the file header.
 
 The returned pixel data should be free()d after use. */
 
+QOIDEF
 void *qoi_read(const char *filename, qoi_desc *desc, int channels);
 
 #endif /* QOI_NO_STDIO */
@@ -275,6 +281,7 @@ is set to the size in bytes of the encoded data.
 
 The returned qoi data should be free()d after use. */
 
+QOIDEF
 void *qoi_encode(const void *data, const qoi_desc *desc, int *out_len);
 
 
@@ -286,6 +293,7 @@ is filled with the description from the file header.
 
 The returned pixel data should be free()d after use. */
 
+QOIDEF
 void *qoi_decode(const void *data, int size, qoi_desc *desc, int channels);
 
 
@@ -353,6 +361,7 @@ static unsigned int qoi_read_32(const unsigned char *bytes, int *p) {
 	return a << 24 | b << 16 | c << 8 | d;
 }
 
+QOIDEF
 void *qoi_encode(const void *data, const qoi_desc *desc, int *out_len) {
 	int i, max_size, p, run;
 	int px_len, px_end, px_pos, channels;
@@ -485,6 +494,7 @@ void *qoi_encode(const void *data, const qoi_desc *desc, int *out_len) {
 	return bytes;
 }
 
+QOIDEF
 void *qoi_decode(const void *data, int size, qoi_desc *desc, int channels) {
 	const unsigned char *bytes;
 	unsigned int header_magic;
@@ -592,6 +602,7 @@ void *qoi_decode(const void *data, int size, qoi_desc *desc, int channels) {
 #ifndef QOI_NO_STDIO
 #include <stdio.h>
 
+QOIDEF
 int qoi_write(const char *filename, const void *data, const qoi_desc *desc) {
 	FILE *f = fopen(filename, "wb");
 	int size, err;
@@ -616,6 +627,7 @@ int qoi_write(const char *filename, const void *data, const qoi_desc *desc) {
 	return err ? 0 : size;
 }
 
+QOIDEF
 void *qoi_read(const char *filename, qoi_desc *desc, int channels) {
 	FILE *f = fopen(filename, "rb");
 	int size, bytes_read;
